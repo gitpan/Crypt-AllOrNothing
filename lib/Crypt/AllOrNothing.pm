@@ -13,11 +13,11 @@ Crypt::AllOrNothing - All-Or-Nothing Encryption
 
 =head1 VERSION
 
-Version 0.09
+Version 0.10
 
 =cut
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 =head1 SYNOPSIS
 
@@ -64,7 +64,7 @@ sub new {
 
 	if (!exists $params{K_0}) {
 		#carp 'No K_0 given.  One will be automatically generated.  You must manually get this value with $AllOrNothing->get_K_0() to decrypt.';
-		$self->{K_0}=newKey(size=>$self->{size}, 'return'=>'ascii');
+		$self->{K_0}=randomValue(size=>$self->{size}, 'return'=>'ascii');
 	} elsif (length $params{K_0} == $self->{size}/8) {
 		$self->{K_0}=$params{K_0};
 	} else {
@@ -118,7 +118,7 @@ sub encrypt {
 	my @message = breakString(string=>$params{plaintext}, size=>$self->{size}/8);
 	
 	#create K_Prime
-	my $K_Prime = newKey(size=>$self->{size}, 'return'=>'ascii');
+	my $K_Prime = randomValue(size=>$self->{size}, 'return'=>'ascii');
 	my $cipher_K_Prime = Crypt::OpenSSL::AES->new($K_Prime) or croak "Could not create AES cipher with K_Prime";
 
 	#add length and padding to message

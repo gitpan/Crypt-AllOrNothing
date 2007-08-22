@@ -11,7 +11,7 @@ WriteMakefile(
     PREREQ_PM => {
         'Test::More' => 0,
 		'Crypt::OpenSSL::AES' => 0,
-		'Crypt::AllOrNothing::Util' => 0,
+		'Crypt::AllOrNothing::Util' => 0.09,
 		'Carp' => 0,
 		'Crypt::Random' => 0,
     },
